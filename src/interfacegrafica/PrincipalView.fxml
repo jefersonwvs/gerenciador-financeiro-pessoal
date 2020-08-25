@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="interfacegrafica.PrincipalViewController">
+   <content>
+      <VBox prefHeight="600.0" prefWidth="700.0">
+         <children>
+            <MenuBar>
+               <menus>
+                  <Menu mnemonicParsing="false" text="Movimentações">
+                    <items>
+                      <MenuItem fx:id="menuItemMovimentacoesCadastrar" mnemonicParsing="false" onAction="#acaoBtCadastrarMovimentacao" text="Cadastrar" />
+                        <MenuItem fx:id="menuItemMovimentacoesListar" mnemonicParsing="false" text="Listar" />
+                    </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="Caixas">
+                    <items>
+                      <MenuItem fx:id="menuItemCaixasListar" mnemonicParsing="false" text="Listar" />
+                    </items>
+                  </Menu>
+               </menus>
+            </MenuBar>
+            <Label alignment="CENTER" prefHeight="81.0" prefWidth="700.0" text="Gerenciador de Finanças Pessoais – GFP">
+               <font>
+                  <Font name="System Bold" size="30.0" />
+               </font>
+            </Label>
+            <TableView fx:id="tableViewMovimentacoes" prefHeight="348.0" prefWidth="700.0">
+              <columns>
+                  <TableColumn fx:id="clmnId" prefWidth="47.0" resizable="false" style="-fx-alignment: CENTER;" text="Id" />
+                <TableColumn fx:id="clmnData" prefWidth="81.0" resizable="false" style="-fx-alignment: CENTER;" text="Data" />
+                <TableColumn fx:id="clmnValor" prefWidth="79.0" resizable="false" style="-fx-alignment: CENTER_RIGHT;" text="Valor" />
+                  <TableColumn fx:id="clmnTipo" resizable="false" style="-fx-alignment: CENTER;" text="Tipo" />
+                  <TableColumn fx:id="clmnDescricao" prefWidth="411.0" resizable="false" style="-fx-alignment: CENTER_LEFT;" text="Descrição" />
+              </columns>
+            </TableView>
+            <GridPane prefHeight="126.0" prefWidth="584.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="344.0" minWidth="10.0" prefWidth="155.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="568.0" minWidth="10.0" prefWidth="476.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="541.0" minWidth="10.0" prefWidth="69.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label prefHeight="30.0" prefWidth="150.0" text="Carteira">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <padding>
+                        <Insets left="15.0" />
+                     </padding>
+                  </Label>
+                  <Label prefHeight="30.0" prefWidth="150.0" text="Banco" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <padding>
+                        <Insets left="15.0" />
+                     </padding>
+                  </Label>
+                  <Label prefHeight="30.0" prefWidth="150.0" text="Total" GridPane.rowIndex="3">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                     <padding>
+                        <Insets left="15.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="labelCarteira" alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="120.0" textAlignment="RIGHT" GridPane.columnIndex="1">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="labelBanco" alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="120.0" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="labelTotal" alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="120.0" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                     <font>
+                        <Font name="System Bold" size="17.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="btAtualizar" mnemonicParsing="false" onAction="#acaoBtAtualizar" text="Atualizar" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+               </children>
+            </GridPane>
+         </children>
+      </VBox>
+   </content>
+</ScrollPane>
