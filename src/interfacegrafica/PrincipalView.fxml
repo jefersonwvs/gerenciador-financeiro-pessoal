@@ -45,7 +45,8 @@
                 <TableColumn fx:id="clmnData" prefWidth="81.0" resizable="false" style="-fx-alignment: CENTER;" text="Data" />
                 <TableColumn fx:id="clmnValor" prefWidth="79.0" resizable="false" style="-fx-alignment: CENTER_RIGHT;" text="Valor" />
                   <TableColumn fx:id="clmnTipo" resizable="false" style="-fx-alignment: CENTER;" text="Tipo" />
-                  <TableColumn fx:id="clmnDescricao" prefWidth="411.0" resizable="false" style="-fx-alignment: CENTER_LEFT;" text="Descrição" />
+                  <TableColumn fx:id="clmnDescricao" minWidth="3.0" prefWidth="367.0" resizable="false" style="-fx-alignment: CENTER_LEFT;" text="Descrição" />
+                  <TableColumn fx:id="clmnExcluir" editable="false" maxWidth="284.0" prefWidth="45.0" sortable="false" style="-fx-alignment: CENTER;" />
               </columns>
             </TableView>
             <GridPane prefHeight="126.0" prefWidth="584.0">

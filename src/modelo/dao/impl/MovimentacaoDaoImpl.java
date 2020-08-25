@@ -84,7 +84,7 @@ public class MovimentacaoDaoImpl implements MovimentacaoDao {
     public void deletaPorId(Integer id) {
         PreparedStatement st = null;
         try {
-            String comandoSQL = "DELETE FROM MOVIMENTACOES WHERE IdMovimentacoes = ?";
+            String comandoSQL = "DELETE FROM MOVIMENTACOES WHERE IdMovimentacao = ?";
             st = conexao.prepareStatement(comandoSQL);
             st.setInt(1, id);
             st.executeUpdate();

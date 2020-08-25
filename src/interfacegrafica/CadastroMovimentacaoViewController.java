@@ -114,7 +114,7 @@ public class CadastroMovimentacaoViewController implements Initializable {
         
         try {
             entidade = obtemDadosCadastro();
-            caixaServico.movimentaCaixa(entidade);
+            caixaServico.cadastraMovimentacao(entidade);
             Utilidades.palcoAtual(evento).close();
         } catch (ValidacaoException e) {
             configuraMensagensErros(e.obtemErros());        
