@@ -49,7 +49,7 @@ public class PrincipalViewController implements Initializable {
     private MenuItem menuItemMovimentacoesCadastrar;
 
     @FXML
-    private MenuItem menuItemMovimentacoesListar;
+    private MenuItem menuItemMovimentacoesRelatorios;
 
     @FXML
     private MenuItem menuItemCaixasListar;
@@ -132,13 +132,18 @@ public class PrincipalViewController implements Initializable {
         labelCarteira.setText("R$ " + String.format("%.2f", listaCaixa.get(0).getSaldoCaixa()));
         labelBanco.setText("R$ " + String.format("%.2f", listaCaixa.get(1).getSaldoCaixa()));
         labelTotal.setText("R$ " + String.format("%.2f", listaCaixa.get(0).getSaldoCaixa() + listaCaixa.get(1).getSaldoCaixa()));
-    
+
         carregarBotoesExcluir();
     }
 
     @FXML
     private void acaoBtCadastrarMovimentacao(ActionEvent evento) {
         carregaTelaCadastroMovimentacao(new Movimentacao());
+    }
+
+    @FXML
+    private void acaoBtRelatoriosMovimentacao(ActionEvent evento) {
+        carregaTelaRelatorios();
     }
 
     private void carregaTelaCadastroMovimentacao(Movimentacao obj) {
@@ -165,6 +170,27 @@ public class PrincipalViewController implements Initializable {
         }
     }
 
+    private void carregaTelaRelatorios() {
+
+        try {
+            FXMLLoader carregador = new FXMLLoader(getClass().getResource("/interfacegrafica/RelatoriosView.fxml"));
+            AnchorPane painel = carregador.load();
+
+            RelatoriosViewController controlador = carregador.getController();
+
+            Stage novoPalco = new Stage();
+            novoPalco.setTitle("GFP – Relatórios");
+            novoPalco.setScene(new Scene(painel));
+            novoPalco.setResizable(false);
+            novoPalco.initOwner(palcoAtual);
+            novoPalco.initModality(Modality.WINDOW_MODAL);
+            novoPalco.showAndWait();
+
+        } catch (IOException ex) {
+            Alertas.mostraAlerta("Erro", null, ex.getMessage(), Alert.AlertType.ERROR);
+        }
+    }
+
     @FXML
     private void acaoBtAtualizar() {
         atualizaTabela();
@@ -176,8 +202,9 @@ public class PrincipalViewController implements Initializable {
         clmnExcluir.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
         clmnExcluir.setCellFactory(param -> new TableCell<Movimentacao, Movimentacao>() {
             Image icone = new Image(getClass().getResourceAsStream("/interfacegrafica/delete.png"));
-            ImageView iconeBotao = new ImageView(icone);    
+            ImageView iconeBotao = new ImageView(icone);
             private final Button botao = new Button(null, iconeBotao); // instanciando um botão com o texto "editar"            
+
             @Override
             protected void updateItem(Movimentacao obj, boolean empty) {
                 super.updateItem(obj, empty); // obtêm os valores de cada linha da tabela
@@ -190,19 +217,19 @@ public class PrincipalViewController implements Initializable {
             }
         });
     }
-    
+
     private void excluirMovimentacao(Movimentacao obj) {
-        
+
         Optional<ButtonType> resultado = Alertas.mostrarConfirmacao("Atenção", "Tem certeza que deseja excluir a movimentação?");
         if (resultado.get() == ButtonType.OK) {
             try {
                 caixaServico.excluiMovimentacao(obj);
-                atualizaTabela();                
+                atualizaTabela();
             } catch (BdException e) { // exceção de bd
                 Alertas.mostraAlerta("Erro ao remover departamento", null, e.getMessage(), Alert.AlertType.ERROR);
             }
         }
-        
+
     }
 
 }

@@ -14,6 +14,7 @@ public class BD {
     private static Connection conexao = null;
 
     public static Connection criaConexao() {
+        
         if (conexao == null) {
             try {
                 Properties props = carregaPropriedades();
@@ -24,6 +25,7 @@ public class BD {
             }
         }
         return conexao;
+        
     }
 
     public static void encerraConexao() {

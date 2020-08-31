@@ -39,31 +39,37 @@ public class CadastroMovimentacaoViewController implements Initializable {
 
     @FXML
     private TextField txtId;
+    
     @FXML
     private Label labelErroId;
 
     @FXML
     private DatePicker dpData;
+    
     @FXML
     private Label labelErroData;
 
     @FXML
     private ComboBox<String> cbbxTipo;
+    
     @FXML
     private Label labelErroTipo;
 
     @FXML
     private TextField txtValor;
+    
     @FXML
     private Label labelErroValor;
 
     @FXML
     private ComboBox<Caixa> cbbxCaixa;
+    
     @FXML
     private Label labelErroCaixa;
 
     @FXML
     private TextArea txtDescricao;
+    
     @FXML
     private Label labelErroDescricao;
 
@@ -147,13 +153,6 @@ public class CadastroMovimentacaoViewController implements Initializable {
         
         txtDescricao.setText(entidade.getDescricao());
     }
-
-    
-    
-    
-    
-    
-    
     
     private Movimentacao obtemDadosCadastro() {
         
@@ -183,26 +182,10 @@ public class CadastroMovimentacaoViewController implements Initializable {
         return new Movimentacao(null, data, valor, TipoMovimentacao.valueOf(tipo), descricao, caixa);
     }
     
-    
-    
-    
-    
-    
-    
-    
     @FXML
     private void acaoBtCancelar(ActionEvent evento) {
         Utilidades.palcoAtual(evento).close();
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     private void configuraMensagensErros(Map<String, String> erros) {
         

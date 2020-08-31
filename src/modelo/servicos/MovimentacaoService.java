@@ -1,5 +1,6 @@
 package modelo.servicos;
 
+import java.util.Date;
 import java.util.List;
 import modelo.dao.FabricaDao;
 import modelo.dao.MovimentacaoDao;
@@ -15,6 +16,10 @@ public class MovimentacaoService {
     
     public List<Movimentacao> listaMovimentacoes(String tipo) {
         return dao.listaMovimentacoes(tipo);
+    }
+    
+    public List<Date> listaMesesMovimentacoes() {
+        return dao.listaMesesMovimentacoes();
     }
 
     public void insereOuAtualiza(Movimentacao obj) {

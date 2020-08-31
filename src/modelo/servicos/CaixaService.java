@@ -17,20 +17,18 @@ public class CaixaService {
 
     public void cadastraMovimentacao(Movimentacao movimentacao) {
 
-        if (movimentacao.getValor() == 0.0) {
+        if (movimentacao.getValor() == 0.0)
             throw new IllegalArgumentException("Valor de movimentação inválido!");
-        }
 
         if ((movimentacao.getTipo().toString().equals("DESPESA") && movimentacao.getCaixa().getSaldoCaixa() >= movimentacao.getValor()) || movimentacao.getTipo().toString().equals("RECEITA")) {
             Caixa caixa = movimentacao.getCaixa();
-            if (movimentacao.getTipo().toString().equals("DESPESA")) {
+            if (movimentacao.getTipo().toString().equals("DESPESA"))
                 caixa.setSaldoCaixa(caixa.getSaldoCaixa() - movimentacao.getValor());
-            } else {
+            else
                 caixa.setSaldoCaixa(caixa.getSaldoCaixa() + movimentacao.getValor());
-            }
-            dao.atualiza(caixa);
             MovimentacaoService servico = new MovimentacaoService();
             servico.insereOuAtualiza(movimentacao);
+            dao.atualiza(caixa);
         } else {
             throw new IllegalArgumentException("Saldo insuficiente!");
         }
@@ -41,11 +39,10 @@ public class CaixaService {
         Caixa caixa = movimentacao.getCaixa();
         MovimentacaoService movimentacaoServico = new MovimentacaoService();
         movimentacaoServico.deleta(movimentacao);
-        if (movimentacao.getTipo().toString().equals("DESPESA")) {
+        if (movimentacao.getTipo().toString().equals("DESPESA"))
             caixa.setSaldoCaixa(caixa.getSaldoCaixa() + movimentacao.getValor());
-        } else {
+        else
             caixa.setSaldoCaixa(caixa.getSaldoCaixa() - movimentacao.getValor());
-        }
         dao.atualiza(caixa);
     }
 }

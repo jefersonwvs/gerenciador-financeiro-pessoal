@@ -1,0 +1,23 @@
+.menu-bar {
+    -fx-background-color: gray;
+}
+
+.menu-bar .menu {
+    -fx-background-color: black;
+    -fx-background-radius: 10;
+    -fx-text-fill: white;
+}
+
+.menu-bar .menu .label {
+    -fx-text-fill: white;
+}
+
+
+
+.table-view {
+    -fx-background-color: gray;
+}
+
+.table-view .column-header .filler{
+    -fx-background-radius: 50;
+}

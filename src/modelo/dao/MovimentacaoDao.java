@@ -1,5 +1,6 @@
 package modelo.dao;
 
+import java.util.Date;
 import java.util.List;
 import modelo.entidades.Caixa;
 import modelo.entidades.Movimentacao;
@@ -12,5 +13,6 @@ public interface MovimentacaoDao {
     List<Movimentacao> listaMovimentacoes();
     List<Movimentacao> listaMovimentacoes(String tipo); // Receita ou Despesa
     List<Movimentacao> listaMovimentacoesPorCaixa(Caixa caixa);
+    List<Date> listaMesesMovimentacoes();
 
 }

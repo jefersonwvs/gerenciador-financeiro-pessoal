@@ -19,12 +19,12 @@
    <content>
       <VBox prefHeight="600.0" prefWidth="700.0">
          <children>
-            <MenuBar>
+            <MenuBar prefWidth="700.0">
                <menus>
                   <Menu mnemonicParsing="false" text="Movimentações">
                     <items>
                       <MenuItem fx:id="menuItemMovimentacoesCadastrar" mnemonicParsing="false" onAction="#acaoBtCadastrarMovimentacao" text="Cadastrar" />
-                        <MenuItem fx:id="menuItemMovimentacoesListar" mnemonicParsing="false" text="Listar" />
+                        <MenuItem fx:id="menuItemMovimentacoesRelatorios" mnemonicParsing="false" onAction="#acaoBtRelatoriosMovimentacao" text="Relatórios" />
                     </items>
                   </Menu>
                   <Menu mnemonicParsing="false" text="Caixas">
@@ -34,7 +34,7 @@
                   </Menu>
                </menus>
             </MenuBar>
-            <Label alignment="CENTER" prefHeight="81.0" prefWidth="700.0" text="Gerenciador de Finanças Pessoais – GFP">
+            <Label alignment="CENTER" prefHeight="81.0" prefWidth="756.0" text="Gerenciador de Finanças Pessoais – GFP">
                <font>
                   <Font name="System Bold" size="30.0" />
                </font>

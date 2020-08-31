@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -238,6 +239,33 @@ public class MovimentacaoDaoImpl implements MovimentacaoDao {
             BD.encerraResultado(rs);
         }
 
+    }
+    
+    @Override
+    public List<Date> listaMesesMovimentacoes() {
+
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        try {
+            String comandoSQL = 
+                    "SELECT MOVIMENTACOES.Data " +
+                    "FROM MOVIMENTACOES " + 
+                    "ORDER BY Data";
+            st = conexao.prepareStatement(comandoSQL);
+            rs = st.executeQuery();
+            List<Date> list = new ArrayList<>();
+            while (rs.next()) {
+                Date date = new java.util.Date(rs.getTimestamp("Data").getTime());
+                list.add(date);
+            }
+            return list;
+            
+        } catch (SQLException e) {
+            throw new BdException(e.getMessage());
+        } finally {
+            BD.encerraDeclaracao(st);
+            BD.encerraResultado(rs);
+        }
     }
     
     
