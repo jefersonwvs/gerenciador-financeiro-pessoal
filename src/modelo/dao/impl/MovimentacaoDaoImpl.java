@@ -1,4 +1,4 @@
-    package modelo.dao.impl;
+package modelo.dao.impl;
 
 import bd.BD;
 import bd.BdException;
@@ -71,9 +71,9 @@ public class MovimentacaoDaoImpl implements MovimentacaoDao {
             st.setString(4, obj.getDescricao());
             st.setInt(5, obj.getCaixa().getId());
             st.setInt(6, obj.getId());
-            
+
             st.executeUpdate();
-            
+
         } catch (SQLException e) {
             throw new BdException(e.getMessage());
         } finally {
@@ -102,12 +102,12 @@ public class MovimentacaoDaoImpl implements MovimentacaoDao {
         PreparedStatement st = null;
         ResultSet rs = null;
         try {
-            String comandoSQL = 
-                    "SELECT MOVIMENTACOES.IdMovimentacao, MOVIMENTACOES.Data, MOVIMENTACOES.Valor, MOVIMENTACOES.Tipo, MOVIMENTACOES.Descricao, CAIXA.* " +
-                    "FROM MOVIMENTACOES INNER JOIN CAIXA " +
-                    "ON MOVIMENTACOES.fkIdCaixa = CAIXA.IdCaixa " +
-                    "ORDER BY Data";
-                    
+            String comandoSQL
+                    = "SELECT MOVIMENTACOES.IdMovimentacao, MOVIMENTACOES.Data, MOVIMENTACOES.Valor, MOVIMENTACOES.Tipo, MOVIMENTACOES.Descricao, CAIXA.* "
+                    + "FROM MOVIMENTACOES INNER JOIN CAIXA "
+                    + "ON MOVIMENTACOES.fkIdCaixa = CAIXA.IdCaixa "
+                    + "ORDER BY Data";
+
             st = conexao.prepareStatement(comandoSQL);
 
             rs = st.executeQuery();
@@ -134,7 +134,7 @@ public class MovimentacaoDaoImpl implements MovimentacaoDao {
                 list.add(obj);
             }
             return list;
-            
+
         } catch (SQLException e) {
             //System.out.println("foi aqui");
             throw new BdException(e.getMessage());
@@ -155,10 +155,10 @@ public class MovimentacaoDaoImpl implements MovimentacaoDao {
                     "ON MOVIMENTACOES.fkIdCaixa = CAIXA.IdCaixa " +
                     "WHERE Tipo = ? " +
                     "ORDER BY Data";
-                    
+
             st = conexao.prepareStatement(comandoSQL);
             st.setString(1, tipo);
-            
+
             rs = st.executeQuery();
 
             List<Movimentacao> list = new ArrayList<>();
@@ -183,7 +183,53 @@ public class MovimentacaoDaoImpl implements MovimentacaoDao {
                 list.add(obj);
             }
             return list;
-            
+
+        } catch (SQLException e) {
+            throw new BdException(e.getMessage());
+        } finally {
+            BD.encerraDeclaracao(st);
+            BD.encerraResultado(rs);
+        }
+    }
+
+    @Override
+    public List<Movimentacao> listaMovimentacoesPorPeriodo(java.sql.Date inicio, java.sql.Date fim) {
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        try {
+            String comandoSQL = 
+                    "SELECT IdMovimentacao, Data, Valor, Tipo, Descricao, NomeCaixa " +
+                    "FROM MOVIMENTACOES INNER JOIN CAIXA " +
+                    "WHERE fkIdCaixa = IdCaixa AND ? <= Data AND Data <= ? " +
+                    "ORDER BY Data";
+
+            st = conexao.prepareStatement(comandoSQL);
+            st.setString(1, inicio.toString());
+            st.setString(2, fim.toString());
+
+            rs = st.executeQuery();
+
+            List<Movimentacao> list = new ArrayList<>();
+            Map<String, Caixa> map = new HashMap<>();
+
+            while (rs.next()) {
+                Caixa caixa = map.get(rs.getString("NomeCaixa"));
+                if (caixa == null) {
+                    caixa = new Caixa();
+                    caixa.setNomeCaixa(rs.getString("NomeCaixa"));
+                    map.put(rs.getString("NomeCaixa"), caixa);
+                }
+                Movimentacao obj = new Movimentacao();
+                obj.setId(rs.getInt("IdMovimentacao"));
+                obj.setData(new java.util.Date(rs.getTimestamp("Data").getTime()));
+                obj.setValor(rs.getDouble("Valor"));
+                obj.setTipo(TipoMovimentacao.valueOf(rs.getString("Tipo")));
+                obj.setDescricao(rs.getString("Descricao"));
+                obj.setCaixa(caixa);
+                list.add(obj);
+            }
+            return list;
+
         } catch (SQLException e) {
             throw new BdException(e.getMessage());
         } finally {
@@ -198,15 +244,15 @@ public class MovimentacaoDaoImpl implements MovimentacaoDao {
         PreparedStatement st = null;
         ResultSet rs = null;
         try {
-            String comandoSQL = "SELECT MOVIMENTACOES.*, CAIXA.NomeCaixa, CAIXA.SaldoCaixa " +
-                    "FROM MOVIMENTACOES INNER JOIN CAIXA " +
-                    "ON MOVIMENTACOES.fkIdCaixa = CAIXA.IdCaixa " +
-                    "WHERE IdCaixa = ? "+
-                    "ORDER BY Data";
-                    
+            String comandoSQL = "SELECT MOVIMENTACOES.*, CAIXA.NomeCaixa, CAIXA.SaldoCaixa "
+                    + "FROM MOVIMENTACOES INNER JOIN CAIXA "
+                    + "ON MOVIMENTACOES.fkIdCaixa = CAIXA.IdCaixa "
+                    + "WHERE IdCaixa = ? "
+                    + "ORDER BY Data";
+
             st = conexao.prepareStatement(comandoSQL);
             st.setInt(1, caixa.getId());
-            
+
             rs = st.executeQuery();
 
             List<Movimentacao> list = new ArrayList<>();
@@ -231,7 +277,7 @@ public class MovimentacaoDaoImpl implements MovimentacaoDao {
                 list.add(obj);
             }
             return list;
-            
+
         } catch (SQLException e) {
             throw new BdException(e.getMessage());
         } finally {
@@ -240,17 +286,17 @@ public class MovimentacaoDaoImpl implements MovimentacaoDao {
         }
 
     }
-    
+
     @Override
-    public List<Date> listaMesesMovimentacoes() {
+    public List<java.util.Date> listaMesesMovimentacoes() {
 
         PreparedStatement st = null;
         ResultSet rs = null;
         try {
-            String comandoSQL = 
-                    "SELECT MOVIMENTACOES.Data " +
-                    "FROM MOVIMENTACOES " + 
-                    "ORDER BY Data";
+            String comandoSQL
+                    = "SELECT MOVIMENTACOES.Data "
+                    + "FROM MOVIMENTACOES "
+                    + "ORDER BY Data";
             st = conexao.prepareStatement(comandoSQL);
             rs = st.executeQuery();
             List<Date> list = new ArrayList<>();
@@ -259,7 +305,7 @@ public class MovimentacaoDaoImpl implements MovimentacaoDao {
                 list.add(date);
             }
             return list;
-            
+
         } catch (SQLException e) {
             throw new BdException(e.getMessage());
         } finally {
@@ -267,7 +313,5 @@ public class MovimentacaoDaoImpl implements MovimentacaoDao {
             BD.encerraResultado(rs);
         }
     }
-    
-    
-    
+
 }

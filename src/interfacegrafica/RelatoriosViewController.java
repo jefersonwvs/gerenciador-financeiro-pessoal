@@ -1,17 +1,18 @@
 package interfacegrafica;
 
 import java.net.URL;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
+import modelo.entidades.Movimentacao;
 import modelo.servicos.CaixaService;
 import modelo.servicos.MovimentacaoService;
 
@@ -23,8 +24,12 @@ public class RelatoriosViewController implements Initializable {
     private ObservableList<String> obsMeses;
     private ObservableList<String> obsTipos;
     
-    @FXML 
-    private ComboBox<String> cbboxPeriodo;
+    
+    @FXML
+    private DatePicker dpInicio;
+    
+    @FXML
+    private DatePicker dpFim;
     
     @FXML
     private ComboBox<String> cbboxTipo;
@@ -48,10 +53,10 @@ public class RelatoriosViewController implements Initializable {
     private void inicializaElementos() {
         movimentacaoServico = new MovimentacaoService();
 
-        meses = movimentacaoServico.listaMesesMovimentacoes();
+        /*meses = movimentacaoServico.listaMesesMovimentacoes();
         obsMeses = FXCollections.observableArrayList(configuraComboBoxPeriodo());
         cbboxPeriodo.getItems().addAll(obsMeses);
-        cbboxPeriodo.getSelectionModel().selectFirst();
+        cbboxPeriodo.getSelectionModel().selectFirst();*/
         
         String[] tipos = {"TODAS", "RECEITA", "DESPESA"};
         obsTipos = FXCollections.observableArrayList(tipos);
@@ -59,7 +64,7 @@ public class RelatoriosViewController implements Initializable {
         cbboxTipo.getSelectionModel().selectFirst();
     }
     
-    private List<String> configuraComboBoxPeriodo() {
+    /*private List<String> configuraComboBoxPeriodo() {
         SimpleDateFormat sdf = new SimpleDateFormat("MM/yyyy");
         List<String> list = new ArrayList<>();
         for (Date date : meses) {
@@ -69,6 +74,14 @@ public class RelatoriosViewController implements Initializable {
             }
         }
         return list;
-    }  
+    }*/
+    
+    @FXML
+    private void acaoBtImprimir(ActionEvent evento) {
+        java.sql.Date inicio = java.sql.Date.valueOf(dpInicio.getValue());
+        java.sql.Date fim = java.sql.Date.valueOf(dpFim.getValue());   
+        List<Movimentacao> list = movimentacaoServico.listaMovimentacoesPorPeriodo(inicio, fim);
+        list.forEach(x -> {System.out.println(x);});
+    }
     
 }

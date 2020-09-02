@@ -22,6 +22,7 @@ public class Caixa implements Serializable {
     public Integer getId() {
         return id;
     }
+    
     public void setId(Integer id) {
         this.id = id;
     }
@@ -29,6 +30,7 @@ public class Caixa implements Serializable {
     public String getNomeCaixa() {
         return nomeCaixa;
     }
+    
     public void setNomeCaixa(String nomeCaixa) {
         this.nomeCaixa = nomeCaixa;
     }
@@ -36,6 +38,7 @@ public class Caixa implements Serializable {
     public Double getSaldoCaixa() {
         return saldoCaixa;
     }
+    
     public void setSaldoCaixa(Double saldoCaixa) {
         this.saldoCaixa = saldoCaixa;
     }

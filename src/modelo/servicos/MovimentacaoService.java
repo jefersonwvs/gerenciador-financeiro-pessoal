@@ -1,6 +1,6 @@
 package modelo.servicos;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 import modelo.dao.FabricaDao;
 import modelo.dao.MovimentacaoDao;
@@ -18,7 +18,11 @@ public class MovimentacaoService {
         return dao.listaMovimentacoes(tipo);
     }
     
-    public List<Date> listaMesesMovimentacoes() {
+    public List<Movimentacao> listaMovimentacoesPorPeriodo(Date inicio, Date fim) {
+        return dao.listaMovimentacoesPorPeriodo(inicio, fim);
+    }
+    
+    public List<java.util.Date> listaMesesMovimentacoes() {
         return dao.listaMesesMovimentacoes();
     }
 
