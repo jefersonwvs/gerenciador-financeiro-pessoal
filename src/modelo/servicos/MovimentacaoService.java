@@ -22,6 +22,18 @@ public class MovimentacaoService {
         return dao.listaMovimentacoesPorPeriodo(inicio, fim);
     }
     
+    public List<Movimentacao> listaMovimentacoesPorPeriodo(Date inicio, Date fim, int idCaixa) {
+        return dao.listaMovimentacoesPorPeriodo(inicio, fim, idCaixa);
+    }
+    
+    public List<Movimentacao> listaMovimentacoesPorPeriodo(Date inicio, Date fim, String tipo) {
+        return dao.listaMovimentacoesPorPeriodo(inicio, fim, tipo);
+    }
+    
+    public List<Movimentacao> listaMovimentacoesPorPeriodo(Date inicio, Date fim, int idCaixa, String tipo) {
+        return dao.listaMovimentacoesPorPeriodo(inicio, fim, idCaixa, tipo);
+    }
+    
     public List<java.util.Date> listaMesesMovimentacoes() {
         return dao.listaMesesMovimentacoes();
     }

@@ -24,7 +24,7 @@
                   <Menu mnemonicParsing="false" text="Movimentações">
                     <items>
                       <MenuItem fx:id="menuItemMovimentacoesCadastrar" mnemonicParsing="false" onAction="#acaoBtCadastrarMovimentacao" text="Cadastrar" />
-                        <MenuItem fx:id="menuItemMovimentacoesRelatorios" mnemonicParsing="false" onAction="#acaoBtRelatoriosMovimentacao" text="Relatórios" />
+                        <MenuItem fx:id="menuItemMovimentacoesExtrato" mnemonicParsing="false" onAction="#acaoBtExtratosMovimentacao" text="Extratos" />
                     </items>
                   </Menu>
                   <Menu mnemonicParsing="false" text="Caixas">

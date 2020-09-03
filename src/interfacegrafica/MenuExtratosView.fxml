@@ -7,9 +7,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="215.0" prefWidth="356.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="interfacegrafica.RelatoriosViewController">
+<AnchorPane id="AnchorPane" prefHeight="259.0" prefWidth="356.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="interfacegrafica.MenuExtratosViewController">
    <children>
-      <Label layoutX="16.0" layoutY="14.0" prefHeight="43.0" prefWidth="122.0" text="Relatórios">
+      <Label layoutX="16.0" layoutY="14.0" prefHeight="43.0" prefWidth="87.0" text="Extratos">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
@@ -25,11 +25,17 @@
          </font>
       </Label>
       <ComboBox fx:id="cbboxTipo" layoutX="95.0" layoutY="128.0" prefHeight="25.0" prefWidth="234.0" />
-      <Button fx:id="btCancelar" layoutX="138.0" layoutY="170.0" mnemonicParsing="false" text="Cancelar" />
-      <Button fx:id="btImprimir" layoutX="222.0" layoutY="170.0" mnemonicParsing="false" onAction="#acaoBtImprimir" text="Imprimir" />
+      <Button fx:id="btCancelar" layoutX="139.0" layoutY="208.0" mnemonicParsing="false" text="Cancelar" />
+      <Button fx:id="btGerar" layoutX="222.0" layoutY="208.0" mnemonicParsing="false" onAction="#acaoBtGerar" text="   Gerar   " />
       <DatePicker fx:id="dpInicio" layoutX="94.0" layoutY="85.0" prefHeight="25.0" prefWidth="107.0" promptText="dd/mm/yyyy" />
       <DatePicker fx:id="dpFim" layoutX="222.0" layoutY="85.0" prefHeight="25.0" prefWidth="107.0" promptText="dd/mm/yyyy" />
       <Label layoutX="94.0" layoutY="68.0" text="Início" />
       <Label layoutX="222.0" layoutY="68.0" text="Fim" />
+      <ComboBox fx:id="cbboxCaixa" layoutX="95.0" layoutY="170.0" prefHeight="25.0" prefWidth="234.0" />
+      <Label layoutX="15.0" layoutY="172.0" text="Caixa">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

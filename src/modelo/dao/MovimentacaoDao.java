@@ -12,6 +12,9 @@ public interface MovimentacaoDao {
     void deletaPorId(Integer id);
     List<Movimentacao> listaMovimentacoes();
     List<Movimentacao> listaMovimentacoesPorPeriodo(Date inicio, Date fim);
+    List<Movimentacao> listaMovimentacoesPorPeriodo(Date inicio, Date fim, int idCaixa);
+    List<Movimentacao> listaMovimentacoesPorPeriodo(Date inicio, Date fim, String tipo);
+    List<Movimentacao> listaMovimentacoesPorPeriodo(Date inicio, Date fim, int idCaixa, String tipo);
     List<Movimentacao> listaMovimentacoes(String tipo); // Receita ou Despesa
     List<Movimentacao> listaMovimentacoesPorCaixa(Caixa caixa);
     List<java.util.Date> listaMesesMovimentacoes();

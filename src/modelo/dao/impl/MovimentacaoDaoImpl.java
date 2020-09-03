@@ -237,7 +237,146 @@ public class MovimentacaoDaoImpl implements MovimentacaoDao {
             BD.encerraResultado(rs);
         }
     }
+    
+    public List<Movimentacao> listaMovimentacoesPorPeriodo(java.sql.Date inicio, java.sql.Date fim, int idCaixa) {
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        try {
+            String comandoSQL = 
+                    "SELECT IdMovimentacao, Data, Valor, Tipo, Descricao, NomeCaixa " +
+                    "FROM MOVIMENTACOES INNER JOIN CAIXA " +
+                    "WHERE fkIdCaixa = IdCaixa AND ? <= Data AND Data <= ? AND fkIdCaixa = ? " +
+                    "ORDER BY Data";
 
+            st = conexao.prepareStatement(comandoSQL);
+            st.setString(1, inicio.toString());
+            st.setString(2, fim.toString());
+            st.setInt(3, idCaixa);
+
+            rs = st.executeQuery();
+
+            List<Movimentacao> list = new ArrayList<>();
+            Map<String, Caixa> map = new HashMap<>();
+
+            while (rs.next()) {
+                Caixa caixa = map.get(rs.getString("NomeCaixa"));
+                if (caixa == null) {
+                    caixa = new Caixa();
+                    caixa.setNomeCaixa(rs.getString("NomeCaixa"));
+                    map.put(rs.getString("NomeCaixa"), caixa);
+                }
+                Movimentacao obj = new Movimentacao();
+                obj.setId(rs.getInt("IdMovimentacao"));
+                obj.setData(new java.util.Date(rs.getTimestamp("Data").getTime()));
+                obj.setValor(rs.getDouble("Valor"));
+                obj.setTipo(TipoMovimentacao.valueOf(rs.getString("Tipo")));
+                obj.setDescricao(rs.getString("Descricao"));
+                obj.setCaixa(caixa);
+                list.add(obj);
+            }
+            return list;
+
+        } catch (SQLException e) {
+            throw new BdException(e.getMessage());
+        } finally {
+            BD.encerraDeclaracao(st);
+            BD.encerraResultado(rs);
+        }
+    }
+    
+    public List<Movimentacao> listaMovimentacoesPorPeriodo(java.sql.Date inicio, java.sql.Date fim, String tipo) {
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        try {
+            String comandoSQL = 
+                    "SELECT IdMovimentacao, Data, Valor, Tipo, Descricao, NomeCaixa " +
+                    "FROM MOVIMENTACOES INNER JOIN CAIXA " +
+                    "WHERE fkIdCaixa = IdCaixa AND ? <= Data AND Data <= ? AND Tipo = ? " +
+                    "ORDER BY Data";
+
+            st = conexao.prepareStatement(comandoSQL);
+            st.setString(1, inicio.toString());
+            st.setString(2, fim.toString());
+            st.setString(3, tipo);
+
+            rs = st.executeQuery();
+
+            List<Movimentacao> list = new ArrayList<>();
+            Map<String, Caixa> map = new HashMap<>();
+
+            while (rs.next()) {
+                Caixa caixa = map.get(rs.getString("NomeCaixa"));
+                if (caixa == null) {
+                    caixa = new Caixa();
+                    caixa.setNomeCaixa(rs.getString("NomeCaixa"));
+                    map.put(rs.getString("NomeCaixa"), caixa);
+                }
+                Movimentacao obj = new Movimentacao();
+                obj.setId(rs.getInt("IdMovimentacao"));
+                obj.setData(new java.util.Date(rs.getTimestamp("Data").getTime()));
+                obj.setValor(rs.getDouble("Valor"));
+                obj.setTipo(TipoMovimentacao.valueOf(rs.getString("Tipo")));
+                obj.setDescricao(rs.getString("Descricao"));
+                obj.setCaixa(caixa);
+                list.add(obj);
+            }
+            return list;
+
+        } catch (SQLException e) {
+            throw new BdException(e.getMessage());
+        } finally {
+            BD.encerraDeclaracao(st);
+            BD.encerraResultado(rs);
+        }
+    }
+
+    public List<Movimentacao> listaMovimentacoesPorPeriodo(java.sql.Date inicio, java.sql.Date fim, int idCaixa, String tipo) {
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        try {
+            String comandoSQL = 
+                    "SELECT IdMovimentacao, Data, Valor, Tipo, Descricao, NomeCaixa " +
+                    "FROM MOVIMENTACOES INNER JOIN CAIXA " +
+                    "WHERE fkIdCaixa = IdCaixa AND ? <= Data AND Data <= ? AND fkIdCaixa = ? AND Tipo = ? " +
+                    "ORDER BY Data";
+
+            st = conexao.prepareStatement(comandoSQL);
+            st.setString(1, inicio.toString());
+            st.setString(2, fim.toString());
+            st.setInt(3, idCaixa);
+            st.setString(4, tipo);
+
+            rs = st.executeQuery();
+
+            List<Movimentacao> list = new ArrayList<>();
+            Map<String, Caixa> map = new HashMap<>();
+
+            while (rs.next()) {
+                Caixa caixa = map.get(rs.getString("NomeCaixa"));
+                if (caixa == null) {
+                    caixa = new Caixa();
+                    caixa.setNomeCaixa(rs.getString("NomeCaixa"));
+                    map.put(rs.getString("NomeCaixa"), caixa);
+                }
+                Movimentacao obj = new Movimentacao();
+                obj.setId(rs.getInt("IdMovimentacao"));
+                obj.setData(new java.util.Date(rs.getTimestamp("Data").getTime()));
+                obj.setValor(rs.getDouble("Valor"));
+                obj.setTipo(TipoMovimentacao.valueOf(rs.getString("Tipo")));
+                obj.setDescricao(rs.getString("Descricao"));
+                obj.setCaixa(caixa);
+                list.add(obj);
+            }
+            return list;
+
+        } catch (SQLException e) {
+            throw new BdException(e.getMessage());
+        } finally {
+            BD.encerraDeclaracao(st);
+            BD.encerraResultado(rs);
+        }
+    }
+    
     @Override
     public List<Movimentacao> listaMovimentacoesPorCaixa(Caixa caixa) {
 

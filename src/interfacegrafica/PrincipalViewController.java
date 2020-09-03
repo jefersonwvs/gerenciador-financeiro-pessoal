@@ -49,7 +49,7 @@ public class PrincipalViewController implements Initializable {
     private MenuItem menuItemMovimentacoesCadastrar;
 
     @FXML
-    private MenuItem menuItemMovimentacoesRelatorios;
+    private MenuItem menuItemMovimentacoesExtrato;
 
     @FXML
     private MenuItem menuItemCaixasListar;
@@ -142,8 +142,8 @@ public class PrincipalViewController implements Initializable {
     }
 
     @FXML
-    private void acaoBtRelatoriosMovimentacao(ActionEvent evento) {
-        carregaTelaRelatorios();
+    private void acaoBtExtratosMovimentacao(ActionEvent evento) {
+        carregaTelaMenuExtratos();
     }
 
     private void carregaTelaCadastroMovimentacao(Movimentacao obj) {
@@ -170,13 +170,13 @@ public class PrincipalViewController implements Initializable {
         }
     }
 
-    private void carregaTelaRelatorios() {
+    private void carregaTelaMenuExtratos() {
 
         try {
-            FXMLLoader carregador = new FXMLLoader(getClass().getResource("/interfacegrafica/RelatoriosView.fxml"));
+            FXMLLoader carregador = new FXMLLoader(getClass().getResource("/interfacegrafica/MenuExtratosView.fxml"));
             AnchorPane painel = carregador.load();
 
-            RelatoriosViewController controlador = carregador.getController();
+            MenuExtratosViewController controlador = carregador.getController();
 
             Stage novoPalco = new Stage();
             novoPalco.setTitle("GFP – Relatórios");
