@@ -25,7 +25,7 @@
          </font>
       </Label>
       <ComboBox fx:id="cbboxTipo" layoutX="95.0" layoutY="128.0" prefHeight="25.0" prefWidth="234.0" />
-      <Button fx:id="btCancelar" layoutX="139.0" layoutY="208.0" mnemonicParsing="false" text="Cancelar" />
+      <Button fx:id="btCancelar" layoutX="139.0" layoutY="208.0" mnemonicParsing="false" onAction="#acaoBtCancelar" text="Cancelar" />
       <Button fx:id="btGerar" layoutX="222.0" layoutY="208.0" mnemonicParsing="false" onAction="#acaoBtGerar" text="   Gerar   " />
       <DatePicker fx:id="dpInicio" layoutX="94.0" layoutY="85.0" prefHeight="25.0" prefWidth="107.0" promptText="dd/mm/yyyy" />
       <DatePicker fx:id="dpFim" layoutX="222.0" layoutY="85.0" prefHeight="25.0" prefWidth="107.0" promptText="dd/mm/yyyy" />
